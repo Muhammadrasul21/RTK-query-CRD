@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import loading from "../assets/loadingg.webp"; 
+
 import { useCreateBlogMutation, useGetBlogsQuery, useDeleteBlogMutation } from "../redux/api/blog.api.js";
 
 const Home = () => {
@@ -87,7 +89,11 @@ const Home = () => {
         </form>
       </div>
 
-      {isLoading && <div className="text-center text-3xl text-gray-600 mt-6">Loading...</div>}
+      {isLoading && (
+        <div className="text-center mt-6">
+          <img src={loading} alt="Loading..." className="mx-auto w-[300px] h-[300px] " />
+        </div>
+      )}
 
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {data?.map((blog) => (

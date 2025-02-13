@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import loadingImage from "../assets/ZKZg.gif" 
+import loadingImage from "../assets/beepboop.gif" 
 
 export const Loading = ()=>{
     return <div className="w-full h-screen flex items-center justify-center">
