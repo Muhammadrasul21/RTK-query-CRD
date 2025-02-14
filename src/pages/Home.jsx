@@ -1,116 +1,104 @@
-import React, { useRef } from "react";
-import loading from "../assets/loadingg.webp"; 
-
-import { useCreateBlogMutation, useGetBlogsQuery, useDeleteBlogMutation } from "../redux/api/blog.api.js";
+import React, { useState } from "react";
+import loading from "../assets/loadingg.webp";
+import { useCreateBookMutation, useGetBooksQuery, useDeleteBookMutation, useUpdateBookMutation } from "../redux/api/blog.api.js";
 
 const Home = () => {
-  const { data, isLoading } = useGetBlogsQuery();
-  const [createBlog, { isLoading: createLoading }] = useCreateBlogMutation();
-  const [deleteBlog] = useDeleteBlogMutation();
+  const { data, isLoading } = useGetBooksQuery();
+  const [createBook, { isLoading: createLoading }] = useCreateBookMutation();
+  const [deleteBook] = useDeleteBookMutation();
+  const [updateBook] = useUpdateBookMutation();
+  const [edit, setEdit] = useState(null);
 
-  const title = useRef(null);
-  const desc = useRef(null);
-  const author = useRef(null); 
-  const type = useRef(null);    
-  const soldCount = useRef(null); 
+  const [form, setForm] = useState({
+    title: "",
+    desc: "",
+    author: "",
+    type: "",
+    soldCount: "",
+  });
 
-  const handleCreateBlog = (e) => {
-    e.preventDefault();
-    let newBlog = {
-      title: title.current.value,
-      desc: desc.current.value,
-      author: author.current.value,  
-      type: type.current.value,     
-      soldCount: soldCount.current.value,
-    };
-
-    createBlog(newBlog)
-      .unwrap()
-      .then(() => {
-        title.current.value = "";
-        desc.current.value = "";
-        author.current.value = "";  
-        type.current.value = "";   
-        soldCount.current.value = ""; 
-      });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleDeleteBlog = (id) => {
-    deleteBlog(id);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (edit) {
+      updateBook({ id: edit.id, body: form }) // ✅ Formdan olinadi
+        .unwrap()
+        .then(() => {
+          setForm({ title: "", desc: "", author: "", type: "", soldCount: "" });
+          setEdit(null);
+        });
+    } else {
+      createBook(form)
+        .unwrap()
+        .then(() => setForm({ title: "", desc: "", author: "", type: "", soldCount: "" }));
+    }
+  };
+
+  const handleDeleteBook = (id) => {
+    deleteBook(id);
+  };
+
+  const handleEdit = (blog) => {
+    setEdit(blog);
+    setForm(blog); // ✅ Formga ma’lumotlarni joylash
   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-xl mx-auto bg-white shadow-lg rounded-lg p-6 mb-6">
-        <h2 className="text-2xl font-bold mb-4 text-center">Create a New Blog</h2>
-        <form onSubmit={handleCreateBlog} className="flex flex-col gap-4">
-          <input
-            required
-            ref={title}
-            className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="text"
-            placeholder="Title"
-          />
-          <input
-            required
-            ref={desc}
-            className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="text"
-            placeholder="Description"
-          />
-          <input
-            required
-            ref={author}
-            className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="text"
-            placeholder="Author"
-          />
-          <input
-            required
-            ref={type}
-            className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="text"
-            placeholder="Type"
-          />
-          <input
-            required
-            ref={soldCount}
-            className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="number"
-            placeholder="Sold Count"
-          />
+        <h2 className="text-2xl font-bold mb-4 text-center">{edit ? "Edit Book" : "Create a New Book"}</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {["title", "desc", "author", "type", "soldCount"].map((field) => (
+            <input
+              key={field}
+              required
+              name={field}
+              value={form[field]}
+              onChange={handleChange}
+              className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              type={field === "soldCount" ? "number" : "text"}
+              placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+            />
+          ))}
           <button
             disabled={createLoading}
             type="submit"
             className="bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-blue-300"
           >
-            {createLoading ? "Loading..." : "Create Blog"}
+            {createLoading ? "Loading..." : edit ? "Save" : "Create Book"}
           </button>
         </form>
       </div>
 
       {isLoading && (
         <div className="text-center mt-6">
-          <img src={loading} alt="Loading..." className="mx-auto w-[300px] h-[300px] " />
+          <img src={loading} alt="Loading..." className="mx-auto w-[300px] h-[300px]" />
         </div>
       )}
 
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {data?.map((blog) => (
-          <div
-            key={blog.id}
-            className="bg-white shadow-lg rounded-lg p-4 hover:shadow-xl transition duration-300"
-          >
+          <div key={blog.id} className="bg-white shadow-lg rounded-lg p-4 hover:shadow-xl transition duration-300">
             <h3 className="text-xl font-bold pb-3 mb-3 border-b border-gray-200">{blog.title}</h3>
             <p className="text-gray-700 mb-2">{blog.desc}</p>
             <p className="text-gray-500 text-sm">Author: {blog.author}</p>
             <p className="text-gray-500 text-sm">Type: {blog.type}</p>
             <p className="text-gray-500 text-sm">Sold Count: {blog.soldCount}</p>
             <button
-              onClick={() => handleDeleteBlog(blog.id)}
+              onClick={() => handleDeleteBook(blog.id)}
               className="bg-red-500 text-white text-sm px-4 py-1 mt-3 rounded-lg hover:bg-red-600 transition duration-300"
             >
               Delete
+            </button>
+            <button
+              onClick={() => handleEdit(blog)}
+              className="bg-green-400 text-white text-sm px-4 py-1 mt-3 rounded-lg hover:bg-green-600 transition duration-300"
+            >
+              Edit
             </button>
           </div>
         ))}
