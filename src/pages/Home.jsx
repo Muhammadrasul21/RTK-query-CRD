@@ -25,7 +25,7 @@ const Home = () => {
     e.preventDefault();
     
     if (edit) {
-      updateBook({ id: edit.id, body: form }) // ✅ Formdan olinadi
+      updateBook({ id: edit.id, body: form })
         .unwrap()
         .then(() => {
           setForm({ title: "", desc: "", author: "", type: "", soldCount: "" });
@@ -44,7 +44,7 @@ const Home = () => {
 
   const handleEdit = (blog) => {
     setEdit(blog);
-    setForm(blog); // ✅ Formga ma’lumotlarni joylash
+    setForm(blog);
   };
 
   return (
@@ -90,7 +90,7 @@ const Home = () => {
             <p className="text-gray-500 text-sm">Sold Count: {blog.soldCount}</p>
             <button
               onClick={() => handleDeleteBook(blog.id)}
-              className="bg-red-500 text-white text-sm px-4 py-1 mt-3 rounded-lg hover:bg-red-600 transition duration-300"
+              className="bg-red-500 text-white text-sm mr-4 px-4 py-1 mt-3 rounded-lg hover:bg-red-600 transition duration-300"
             >
               Delete
             </button>
