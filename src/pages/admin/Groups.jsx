@@ -1,5 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react'
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, Outlet} from 'react-router-dom'
 
 const Groups = () => {
 
@@ -8,7 +7,7 @@ const Groups = () => {
         <h2 className='text-3xl'>Groups</h2>
         <ul className='flex my-6 gap-4' id='group-tab'>
             <li>
-                <NavLink end={true} to={""}>Videolar</NavLink>
+                <NavLink end={true} to={""}>Videos</NavLink>
             </li>
             <li>
                 <NavLink to={"table"}>Table</NavLink>

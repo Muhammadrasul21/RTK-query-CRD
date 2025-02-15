@@ -1,7 +1,15 @@
-import RouterMain from "./router"
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import RouterMain from "./router/index";
 
-function App() {
-  return <RouterMain/>
-}
+const App = () => {
+  return (
+    <>
+      <RouterMain />
+      <ToastContainer position="top-right" autoClose={1500} />
+    </>
+  );
+};
 
-export default App
+export default App;

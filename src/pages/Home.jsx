@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import loading from "../assets/loadingg.webp";
 import { useCreateBookMutation, useGetBooksQuery, useDeleteBookMutation, useUpdateBookMutation } from "../redux/api/blog.api.js";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const { data, isLoading } = useGetBooksQuery();
@@ -30,16 +32,19 @@ const Home = () => {
         .then(() => {
           setForm({ title: "", desc: "", author: "", type: "", soldCount: "" });
           setEdit(null);
+          toast.warning("Book updated successfully!");
         });
     } else {
       createBook(form)
         .unwrap()
         .then(() => setForm({ title: "", desc: "", author: "", type: "", soldCount: "" }));
+         toast.success("Book created successfully!")
     }
   };
 
   const handleDeleteBook = (id) => {
     deleteBook(id);
+    toast.error("Book deleted successfully!")
   };
 
   const handleEdit = (blog) => {
@@ -89,9 +94,11 @@ const Home = () => {
             <p className="text-gray-500 text-sm">Type: {blog.type}</p>
             <p className="text-gray-500 text-sm">Sold Count: {blog.soldCount}</p>
             <button
+            
               onClick={() => handleDeleteBook(blog.id)}
               className="bg-red-500 text-white text-sm mr-4 px-4 py-1 mt-3 rounded-lg hover:bg-red-600 transition duration-300"
             >
+              
               Delete
             </button>
             <button
