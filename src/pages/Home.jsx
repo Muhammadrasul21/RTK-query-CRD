@@ -53,8 +53,8 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-xl mx-auto bg-white shadow-lg rounded-lg p-6 mb-6">
+    <div className="min-h-screen bg-gray-100 p-8 bg">
+      <div className="max-w-xl mx-auto  bg-gray-900 text-white shadow-lg rounded-lg p-6 mb-6">
         <h2 className="text-2xl font-bold mb-4 text-center">{edit ? "Edit Book" : "Create a New Book"}</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {["title", "desc", "author", "type", "soldCount"].map((field) => (
@@ -64,7 +64,7 @@ const Home = () => {
               name={field}
               value={form[field]}
               onChange={handleChange}
-              className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-white"
               type={field === "soldCount" ? "number" : "text"}
               placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
             />
@@ -87,12 +87,12 @@ const Home = () => {
 
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {data?.map((blog) => (
-          <div key={blog.id} className="bg-white shadow-lg rounded-lg p-4 hover:shadow-xl transition duration-300">
+          <div key={blog.id} className=" bg-gray-900 text-white shadow-lg rounded-lg p-4 hover:shadow-xl transition duration-300">
             <h3 className="text-xl font-bold pb-3 mb-3 border-b border-gray-200">{blog.title}</h3>
-            <p className="text-gray-700 mb-2">{blog.desc}</p>
-            <p className="text-gray-500 text-sm">Author: {blog.author}</p>
-            <p className="text-gray-500 text-sm">Type: {blog.type}</p>
-            <p className="text-gray-500 text-sm">Sold Count: {blog.soldCount}</p>
+            <p className="mb-2">{blog.desc}</p>
+            <p className="text-sm">Author: {blog.author}</p>
+            <p className="text-sm">Type: {blog.type}</p>
+            <p className="text-sm">Sold Count: {blog.soldCount}</p>
             <button
             
               onClick={() => handleDeleteBook(blog.id)}

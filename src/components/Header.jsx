@@ -1,31 +1,42 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import book from "../assets/book.png"
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoSearch } from "react-icons/io5";
+import { FaRegHeart } from "react-icons/fa";
+import { LuShoppingCart } from "react-icons/lu";
+
 
 const Header = () => {
   return (
-    <nav className='bg-gray-800'>
-      <div className='container mx-auto h-20 flex items-center justify-between px-4'>
-        <Link to={"/"} className='text-2xl font-medium text-white'>
-          Logoo
+    <nav className="bg-blue-600 shadow-md sticky top-0 left-0 w-full z-50">
+      <div className="container mx-auto h-16 flex items-center justify-between px-6">
+        
+        <Link to="/" className="flex items-center gap-2">
+          <img src={book} alt="book" className="w-16 h-16 font-semibold" />
+          <p className="text-2xl font-semibold">Book</p>
         </Link>
 
-        <div className='flex gap-8'>
-          <Link to={"/"} className='text-white hover:text-gray-300'>
-            Home
-          </Link>
-          <Link to={"/about"} className='text-white hover:text-gray-300'>
-            About
-          </Link>
-          <Link to={"/contact"} className='text-white hover:text-gray-300'>
-            Contact
-          </Link>
-          <Link to={"/admin"} className='text-white hover:text-gray-300'>
-            Admin
-          </Link>
+        <div className="gap-6 hidden md:flex">
+          {["Home", "About", "Contact", "Admin"].map((item, index) => (
+            <Link
+              key={index}
+              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+              className="text-white opacity-70 hover:opacity-100 transition"
+            >
+              {item}
+            </Link>
+          ))}
+        </div>
+        <div className="flex gap-4">
+            <IoSearch className="hidden sm:flex w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer"/>
+            <FaRegHeart className="w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer"/>
+            <LuShoppingCart className="w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer"/>
+            <GiHamburgerMenu className="w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer"/>
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

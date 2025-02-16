@@ -1,4 +1,7 @@
 @import "tailwindcss";
 .container{
-    width: 1400px;
+    max-width: 1400px;
+}
+.bg{
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
 }

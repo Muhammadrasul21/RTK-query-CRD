@@ -15,6 +15,10 @@ const Users = lazy(()=> import("../pages/admin/User"))
 const Groups = lazy(()=> import("../pages/admin/Groups"))
 const Car  = lazy(() => import("../pages/admin/Car"));
 const CreateCars  = lazy(() => import("../pages/admin/CreateCar"));
+const Analytic  = lazy(() => import("../pages/admin/Analytic"));
+const Likes  = lazy(() => import("../pages/admin/Likes"));
+const Reports  = lazy(() => import("../pages/admin/Reports"));
+const Settings  = lazy(() => import("../pages/admin/Settings"));
 
 
 
@@ -22,7 +26,7 @@ const RouterMain = () => {
   return (
     <Routes>
       <Route path="/" element={<SuspenseContainer><Layout /></SuspenseContainer>}>
-        <Route index element={<SuspenseContainer><Home /></SuspenseContainer>} />
+        <Route path='/'  element={<SuspenseContainer><Home /></SuspenseContainer>} />
         <Route path="about" element={<SuspenseContainer><About /></SuspenseContainer>} />
         <Route path="contact" element={<SuspenseContainer><Contact /></SuspenseContainer>} />
       </Route>
@@ -37,9 +41,14 @@ const RouterMain = () => {
         </Route>
         <Route path="users" element={<SuspenseContainer><Users /></SuspenseContainer>} />
         <Route path="shop" element={<SuspenseContainer><Shop /></SuspenseContainer>} />
+        <Route path="analytic" element={<SuspenseContainer><Analytic /></SuspenseContainer>} />
+        <Route path="likes" element={<SuspenseContainer><Likes /></SuspenseContainer>} />
+        <Route path="reports" element={<SuspenseContainer><Reports /></SuspenseContainer>} />
+        <Route path="settings" element={<SuspenseContainer><Settings /></SuspenseContainer>} />
       </Route>
     </Routes>
   )
 }
 
 export default RouterMain
+
