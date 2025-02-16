@@ -27,7 +27,7 @@ const Car = () => {
     const { name, value, type } = e.target;
     setForm({
       ...form,
-      [name]: type === "number" ? Number(value) : value,
+      [name]: type === "number" ? +(value) : value,
     });
   };
 
@@ -57,9 +57,8 @@ const Car = () => {
       });
     toast.warning("Book updated successfully!");
   };
-
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen p-8">
       {isLoading && (
         <div className="text-center mt-6">
           <img
@@ -74,7 +73,7 @@ const Car = () => {
         {data?.map((car) => (
           <div
             key={car.id}
-            className="bg-white shadow-lg rounded-lg p-4 hover:shadow-xl transition duration-300"
+            className="text-white  bg-gray-900 shadow-lg rounded-lg p-4 hover:shadow-xl transition duration-300"
           >
             <h3 className="text-xl font-bold pb-3 mb-3 border-b border-gray-200">
               {car.car}
@@ -86,10 +85,10 @@ const Car = () => {
                 className="w-full h-40 object-cover rounded-md mb-2"
               />
             )}
-            <p className="text-gray-700 mb-2">{car.desc}</p>
-            <p className="text-gray-500 text-sm">Brand: {car.brand}</p>
-            <p className="text-gray-500 text-sm">Year: {car.year}</p>
-            <p className="text-gray-500 text-sm">Price: ${car.price}</p>
+            <p className="mb-2">{car.desc}</p>
+            <p className="text-sm">Brand: {car.brand}</p>
+            <p className="text-sm">Year: {car.year}</p>
+            <p className="text-sm">Price: ${car.price}</p>
             <button
               onClick={() => handleDeleteCar(car.id)}
               className="bg-red-500 text-white text-sm mr-4 px-4 py-1 mt-3 rounded-lg hover:bg-red-600 transition duration-300 cursor-pointer"

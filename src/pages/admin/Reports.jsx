@@ -3,7 +3,7 @@ import { reports } from "../../static";
 
 const Reports = () => {
   return (
-    <div className="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-lg">
+    <div className="p-6 max-w-2xl mx-auto bg-gray-900 text-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Reports</h2>
       <div className="space-y-4">
         {reports.map((report, index) => (

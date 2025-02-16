@@ -2,7 +2,7 @@ import React from "react";
 
 const Text = () => {
   return (
-    <div>
+    <div className="text-white">
       <h2>Text</h2>
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla placeat,

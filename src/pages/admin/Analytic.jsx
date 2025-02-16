@@ -11,7 +11,7 @@ const Analytic = () => {
   ];
 
   return (
-    <div className="p-6 max-w-lg mx-auto bg-white shadow-lg rounded-lg">
+    <div className="p-6 max-w-lg mx-auto bg-gray-900 text-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Analytics</h2>
       <div className="space-y-4">
         {stats.map((stat, index) => (

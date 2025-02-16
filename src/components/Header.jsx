@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import book from "../assets/book.png";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -8,6 +8,8 @@ import { LuShoppingCart } from "react-icons/lu";
 import { navbarLinks } from "../static/index";
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <nav className="bg-blue-600 shadow-md sticky top-0 left-0 w-full z-50">
       <div className="container mx-auto h-16 flex items-center justify-between px-6">
@@ -31,8 +33,29 @@ const Header = () => {
           <IoSearch className="hidden sm:flex w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />
           <FaRegHeart className="w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />
           <LuShoppingCart className="w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />
-          <GiHamburgerMenu className="flex sm:hidden w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />
+          <GiHamburgerMenu
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="flex sm:hidden w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer"
+          />
         </div>
+      </div>
+
+      <div
+        className={`${menuOpen ? "max-h-screen" : "max-h-0"} overflow-hidden transition-all duration-300 bg-blue-700 sm:hidden`}
+      >
+        <ul className="flex flex-col gap-4 p-4">
+          {navbarLinks?.map((item, index) => (
+            <li key={index}>
+              <Link
+                to={item === "Home" ? "/" : `${item.toLocaleLowerCase()}`}
+                className="block text-white opacity-70 hover:opacity-100 transition p-2"
+                onClick={() => setMenuOpen(false)}
+              >
+                {item}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   );

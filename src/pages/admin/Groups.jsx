@@ -2,7 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const Groups = () => {
   return (
-    <div>
+    <div className="text-white">
       <h2 className="text-3xl">Groups</h2>
       <ul className="flex my-6 gap-4" id="group-tab">
         <li>
