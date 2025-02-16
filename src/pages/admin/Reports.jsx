@@ -1,13 +1,7 @@
 import React from "react";
+import { reports } from "../../static";
 
 const Reports = () => {
-  const reports = [
-    { title: "Monthly Report", date: "January 2025" },
-    { title: "Annual Report", date: "2024" },
-    { title: "Weekly Summary", date: "Week 6, 2025" },
-    { title: "Daily Activity", date: "February 16, 2025" },
-  ];
-
   return (
     <div className="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Reports</h2>

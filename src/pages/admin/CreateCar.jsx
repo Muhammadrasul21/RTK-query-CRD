@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCreateCarMutation } from "../../redux/api/car.api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { carInputs } from "../../static";
 const CreateCar = () => {
   const [createCar, { isLoading: createLoading }] = useCreateCarMutation();
 
@@ -24,7 +25,11 @@ const CreateCar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const carData = { ...form, year: Number(form.year), price: Number(form.price) };
+    const carData = {
+      ...form,
+      year: Number(form.year),
+      price: Number(form.price),
+    };
 
     createCar(carData)
       .unwrap()
@@ -36,18 +41,19 @@ const CreateCar = () => {
           brand: "",
           year: "",
           price: "",
-        })
+        }),
       );
-      toast.success("Book created successfully!")
-
+    toast.success("Book created successfully!");
   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-xl mx-auto bg-white shadow-lg rounded-lg p-6 mb-6">
-        <h2 className="text-2xl font-bold mb-4 text-center">Create a New Car</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          Create a New Car
+        </h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {["title", "desc", "brand", "year", "price"].map((field) => (
+          {carInputs.map((field) => (
             <input
               key={field}
               required

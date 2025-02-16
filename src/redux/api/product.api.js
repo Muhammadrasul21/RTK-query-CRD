@@ -1,12 +1,12 @@
-import { mainApi } from './index'
+import { mainApi } from "./index";
 
 const extendedApi = mainApi.injectEndpoints({
   endpoints: (build) => ({
     getProducts: build.query({
-      query: () => '/products',
+      query: () => "/products",
     }),
   }),
   overrideExisting: false,
-})
+});
 
-export const { useGetProductsQuery } = extendedApi; 
+export const { useGetProductsQuery } = extendedApi;

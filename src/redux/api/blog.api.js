@@ -1,22 +1,22 @@
-import { mainApi } from './index';
+import { mainApi } from "./index";
 
 const extendedApi = mainApi.injectEndpoints({
   endpoints: (build) => ({
     getBooks: build.query({
       query: (params) => ({
-        url: '/blogs',
-        method: 'GET',
+        url: "/blogs",
+        method: "GET",
         params,
       }),
       providesTags: ["BOOK"],
     }),
     createBook: build.mutation({
       query: (body) => ({
-        url: '/blogs',
-        method: 'POST',
+        url: "/blogs",
+        method: "POST",
         body,
       }),
-      invalidatesTags: ["BOOK"], 
+      invalidatesTags: ["BOOK"],
     }),
     deleteBook: build.mutation({
       query: (id) => ({
@@ -26,10 +26,10 @@ const extendedApi = mainApi.injectEndpoints({
       invalidatesTags: ["BOOK"],
     }),
     updateBook: build.mutation({
-      query: ({ id, body }) => ({ 
+      query: ({ id, body }) => ({
         url: `/blogs/${id}`,
         method: "PUT",
-        body,  
+        body,
       }),
       invalidatesTags: ["BOOK"],
     }),
@@ -37,9 +37,9 @@ const extendedApi = mainApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { 
-  useGetBooksQuery, 
-  useCreateBookMutation, 
+export const {
+  useGetBooksQuery,
+  useCreateBookMutation,
   useDeleteBookMutation,
-  useUpdateBookMutation 
+  useUpdateBookMutation,
 } = extendedApi;

@@ -26,27 +26,52 @@ const Footer = () => {
           <h4 className="text-lg font-semibold">Follow Us</h4>
           <ul className="flex flex-col gap-2 mt-2">
             <li>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-500 transition"
+              >
                 Facebook
               </a>
             </li>
             <li>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-400 transition"
+              >
                 Twitter
               </a>
             </li>
             <li>
-              <a href="https://www.instagram.com/gulomoov_1/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition">
+              <a
+                href="https://www.instagram.com/gulomoov_1/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-pink-500 transition"
+              >
                 Instagram
               </a>
             </li>
             <li>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-700 transition">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-700 transition"
+              >
                 LinkedIn
               </a>
             </li>
             <li>
-              <a href="https://www.youtube.com/@gulomoov__1" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition">
+              <a
+                href="https://www.youtube.com/@gulomoov__1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-red-500 transition"
+              >
                 YouTube
               </a>
             </li>
@@ -54,10 +79,16 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col items-start lg:items-center">
-          <a href="/privacy-policy" className="hover:text-gray-400 transition mb-2">
+          <a
+            href="/privacy-policy"
+            className="hover:text-gray-400 transition mb-2"
+          >
             Privacy Policy
           </a>
-          <a href="/terms-of-service" className="hover:text-gray-400 transition">
+          <a
+            href="/terms-of-service"
+            className="hover:text-gray-400 transition"
+          >
             Terms of Service
           </a>
         </div>

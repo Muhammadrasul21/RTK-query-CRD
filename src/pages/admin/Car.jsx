@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import loading from "../../assets/loadingg.webp";
-import { useGetCarsQuery, useDeleteCarMutation, useUpdateCarMutation } from "../../redux/api/car.api";
+import {
+  useGetCarsQuery,
+  useDeleteCarMutation,
+  useUpdateCarMutation,
+} from "../../redux/api/car.api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { carInputs } from "../../static";
 
 const Car = () => {
   const { data, isLoading } = useGetCarsQuery();
@@ -29,7 +33,7 @@ const Car = () => {
 
   const handleDeleteCar = (id) => {
     deleteCar({ id });
-    toast.error("Book deleted successfully!")
+    toast.error("Book deleted successfully!");
   };
 
   const handleEdit = (car) => {
@@ -51,15 +55,18 @@ const Car = () => {
           price: "",
         });
       });
-      toast.warning("Book updated successfully!");
-
+    toast.warning("Book updated successfully!");
   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       {isLoading && (
         <div className="text-center mt-6">
-          <img src={loading} alt="Loading..." className="mx-auto w-[300px] h-[300px]" />
+          <img
+            src={loading}
+            alt="Loading..."
+            className="mx-auto w-[300px] h-[300px]"
+          />
         </div>
       )}
 
@@ -100,11 +107,17 @@ const Car = () => {
       </div>
 
       {editCar && (
-        <div  onClick={() => setEditCar(null)}  className="fixed inset-0 bg-[#00000095] bg-opacity-50 flex justify-center items-center">
-          <div onClick={(e) => e.stopPropagation()} className="bg-white p-6 rounded-lg shadow-lg w-96">
+        <div
+          onClick={() => setEditCar(null)}
+          className="fixed inset-0 bg-[#00000095] bg-opacity-50 flex justify-center items-center"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white p-6 rounded-lg shadow-lg w-96"
+          >
             <h2 className="text-xl font-bold mb-4 text-center">Edit Car</h2>
             <form className="flex flex-col gap-4">
-              {["title", "desc", "brand", "year", "price"].map((field) => (
+              {carInputs.map((field) => (
                 <input
                   key={field}
                   required
@@ -112,7 +125,9 @@ const Car = () => {
                   value={form[field]}
                   onChange={handleChange}
                   className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  type={field === "year" || field === "price" ? "number" : "text"}
+                  type={
+                    field === "year" || field === "price" ? "number" : "text"
+                  }
                   placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
                 />
               ))}

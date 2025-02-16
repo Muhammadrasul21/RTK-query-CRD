@@ -5,17 +5,20 @@ const Users = () => {
     <div className="p-6 max-w-3xl mx-auto bg-white shadow-lg rounded-lg">
       <h2 className="text-3xl font-semibold mb-4">Users</h2>
       <p className="text-gray-700 leading-relaxed">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis unde libero 
-        accusantium nemo at corporis dolorum error vero illo commodi. Voluptates aliquam 
-        illum autem fuga! Quisquam nisi modi, obcaecati repudiandae totam facilis debitis 
-        ad, quis quaerat dolorum incidunt. Similique, labore explicabo sit dolor excepturi 
-        tempora adipisci suscipit repellat in molestias ullam velit fuga voluptatibus, 
-        cum ipsum omnis repellendus aliquid id? Eligendi incidunt accusantium quaerat, 
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis unde
+        libero accusantium nemo at corporis dolorum error vero illo commodi.
+        Voluptates aliquam illum autem fuga! Quisquam nisi modi, obcaecati
+        repudiandae totam facilis debitis ad, quis quaerat dolorum incidunt.
+        Similique, labore explicabo sit dolor excepturi tempora adipisci
+        suscipit repellat in molestias ullam velit fuga voluptatibus, cum ipsum
+        omnis repellendus aliquid id? Eligendi incidunt accusantium quaerat,
         magni sequi ad ipsam facilis illum explicabo voluptatem dolore.
       </p>
       <div className="mt-6 p-4 bg-gray-100 rounded-md">
         <h3 className="text-xl font-medium mb-2">Total Users: 1500</h3>
-        <p className="text-gray-600">Active Users: 1200 | Inactive Users: 300</p>
+        <p className="text-gray-600">
+          Active Users: 1200 | Inactive Users: 300
+        </p>
       </div>
     </div>
   );
