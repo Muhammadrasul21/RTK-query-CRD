@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { adminLinks } from "@/static";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
-import { LuShoppingCart } from "react-icons/lu";
+import { LuShoppingCart } from "react-icons/lu"; 
 import { CiLogout } from "react-icons/ci";
 import car from "@/assets/car.png"
 const Admin = () => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
+
+  useEffect(()=>{
+    navigate(adminLinks[0]?.path)
+  },[])
 
   return (
     <div className="flex">
