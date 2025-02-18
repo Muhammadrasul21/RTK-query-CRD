@@ -16,9 +16,7 @@ const Users = () => {
       </p>
       <div className="mt-6 p-4 bg rounded-md">
         <h3 className="text-xl font-medium mb-2">Total Users: 1500</h3>
-        <p>
-          Active Users: 1200 | Inactive Users: 300
-        </p>
+        <p>Active Users: 1200 | Inactive Users: 300</p>
       </div>
     </div>
   );

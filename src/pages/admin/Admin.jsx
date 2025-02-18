@@ -4,16 +4,33 @@ import { adminLinks } from "@/static";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
-import { LuShoppingCart } from "react-icons/lu"; 
+import { LuShoppingCart } from "react-icons/lu";
 import { CiLogout } from "react-icons/ci";
-import car from "@/assets/car.png"
+import car from "@/assets/car.png";
+import { useProfileQuery } from "@/redux/api/auth.api";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/features/auth.slice";
+import { IoMdHome } from "react-icons/io";
+
 const Admin = () => {
+  const { isError } = useProfileQuery({});
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (isError) {
+      dispatch(logout());
+    }
+  });
+
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
 
-  useEffect(()=>{
-    navigate(adminLinks[0]?.path)
-  },[])
+  useEffect(() => {
+    navigate(adminLinks[0]?.path);
+  }, []);
 
   return (
     <div className="flex">
@@ -23,6 +40,10 @@ const Admin = () => {
         }`}
       >
         <div className="flex items-center justify-between">
+          <IoMdHome
+            onClick={() => navigate("/")}
+            className="w-6 h-6 cursor-pointer"
+          />
           <p
             className={`text-2xl font-bold transition-all ${sidebarOpen ? "block" : "hidden"}`}
           >
@@ -61,9 +82,12 @@ const Admin = () => {
         </ul>
 
         <div className=" flex items-center">
-          <CiLogout onClick={()=> navigate("/")} className="flex sm:hidden m-auto w-5 h-5" />
-          <button
+          <CiLogout
             onClick={() => navigate("/")}
+            className="flex sm:hidden m-auto w-5 h-5"
+          />
+          <button
+            onClick={handleLogout}
             className={`hidden sm:flex items-center gap-3 py-2 px-3 rounded bg-red-500 hover:bg-red-600 transition-all`}
           >
             <CiLogout className="w-5 h-5" />
@@ -76,7 +100,7 @@ const Admin = () => {
         <nav className="bg-blue-600 shadow-md sticky top-0 left-0 w-full z-50">
           <div className="container mx-auto h-16 flex items-center justify-between px-6">
             <Link to="/" className="flex items-center gap-2">
-            <img src={car} alt="" className="w-20 h-20 filter invert" />
+              <img src={car} alt="" className="w-20 h-20 filter invert" />
               <p className="hidden sm:flex text-2xl font-semibold text-white">
                 Cars
               </p>

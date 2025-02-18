@@ -5,6 +5,25 @@
 .bg {
   background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
 }
-body{
+body {
   background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+}
+#basic_username,
+#basic_password,
+.ant-input-affix-wrapper {
+  background-color: inherit !important;
+  color: white !important;
+}
+
+#basic_username:focus,
+#basic_password:focus,
+.ant-input-affix-wrapper:focus {
+  background-color: inherit !important;
+}
+
+.ant-typography,
+.ant-form-item-required,
+.anticon,
+.ant-checkbox-label {
+  color: white !important;
 }

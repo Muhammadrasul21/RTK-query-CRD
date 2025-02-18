@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import loading from "../assets/loadingg.webp";
+import loading from "@/assets/loadingg.webp";
 import {
   useCreateBookMutation,
   useGetBooksQuery,
   useDeleteBookMutation,
   useUpdateBookMutation,
-} from "../redux/api/blog.api.js";
+} from "@/redux/api/blog.api.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { homeINputs } from "../static/index.js";
+import { homeINputs } from "@/static/index.js";
 
 const Home = () => {
   const { data, isLoading } = useGetBooksQuery();

@@ -1,5 +1,5 @@
 import React from "react";
-import { reports } from "../../static";
+import { reports } from "@/static";
 
 const Reports = () => {
   return (

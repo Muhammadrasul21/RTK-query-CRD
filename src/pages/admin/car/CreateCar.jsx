@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useCreateCarMutation } from "../../redux/api/car.api";
+import { useCreateCarMutation } from "@/redux/api/car.api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { carInputs } from "../../static";
-
+import { carInputs } from "@/static";
 const CreateCar = () => {
   const [createCar, { isLoading: createLoading }] = useCreateCarMutation();
 
@@ -20,7 +19,7 @@ const CreateCar = () => {
     const { name, value, type } = e.target;
     setForm({
       ...form,
-      [name]: type === "number" ? +(value) : value,
+      [name]: type === "number" ? +value : value,
     });
   };
 
@@ -29,11 +28,11 @@ const CreateCar = () => {
     if (!form.image.startsWith("http")) {
       return toast.error("Please enter a valid image URL!");
     }
-    
+
     const carData = {
       ...form,
-      year: +(form.year),
-      price: +(form.price),
+      year: +form.year,
+      price: +form.price,
     };
 
     createCar(carData)
@@ -55,7 +54,9 @@ const CreateCar = () => {
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-xl mx-auto bg-gray-900 text-white shadow-lg rounded-lg p-6 mb-6">
-        <h2 className="text-2xl font-bold mb-4 text-center">Create a New Car</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          Create a New Car
+        </h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {carInputs.map((field) => (
             <input
@@ -85,7 +86,7 @@ const CreateCar = () => {
           >
             {createLoading ? "Loading..." : "Create Car"}
           </button>
-        </form>
+        </form>  
       </div>
     </div>
   );

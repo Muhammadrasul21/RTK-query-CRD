@@ -15,7 +15,7 @@ export const carApi = createApi({
 });
 export const dummyApi = createApi({
   reducerPath: "dummyApi",
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL  }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   endpoints: () => ({}),
   tagTypes: ["DUMMY", "PRODUCT"],
 });

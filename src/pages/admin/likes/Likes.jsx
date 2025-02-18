@@ -1,5 +1,5 @@
 import React from "react";
-import { likedCars } from "../../static";
+import { likedCars } from "@/static";
 
 const Likes = () => {
   return (

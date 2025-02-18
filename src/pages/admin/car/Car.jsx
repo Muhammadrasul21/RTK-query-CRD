@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import loading from "../../assets/loadingg.webp";
+import loading from "@/assets/loadingg.webp";
 import {
   useGetCarsQuery,
   useDeleteCarMutation,
   useUpdateCarMutation,
-} from "../../redux/api/car.api";
+} from "@/redux/api/car.api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { carInputs } from "../../static";
+import { carInputs } from "@/static";
 
 const Car = () => {
   const { data, isLoading } = useGetCarsQuery();
@@ -27,7 +27,7 @@ const Car = () => {
     const { name, value, type } = e.target;
     setForm({
       ...form,
-      [name]: type === "number" ? +(value) : value,
+      [name]: type === "number" ? +value : value,
     });
   };
 
