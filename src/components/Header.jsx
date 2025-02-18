@@ -34,13 +34,14 @@ const Header = () => {
               <Link
                 key={index}
                 to={linkPath}
-                className={`text-white transition ${isActive ? "opacity-100 font font-semibold" : "opacity-70 hover:opacity-100"}`}
+                className={`text-white text-xl transition ${isActive ? "opacity-100 font font-semibold" : "opacity-70 hover:opacity-100"}`}
               >
                 {item}
               </Link>
             );
           })}
         </div>
+
         <div className="flex gap-4">
           <IoSearch className="hidden sm:flex w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />
           <FaRegHeart className="w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import loading from "@/assets/loadingg.webp";
 import {
   useGetCarsQuery,
@@ -8,6 +8,8 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { carInputs } from "@/static";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Car = () => {
   const { data, isLoading } = useGetCarsQuery();
@@ -22,6 +24,10 @@ const Car = () => {
     year: "",
     price: "",
   });
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -57,6 +63,7 @@ const Car = () => {
       });
     toast.warning("Book updated successfully!");
   };
+
   return (
     <div className="min-h-screen p-8">
       {isLoading && (
@@ -73,7 +80,9 @@ const Car = () => {
         {data?.map((car) => (
           <div
             key={car.id}
-            className="text-white  bg-gray-900 shadow-lg rounded-lg p-4 hover:shadow-xl transition duration-300"
+            className="text-white bg-gray-900 shadow-lg rounded-lg p-4 hover:shadow-xl transition duration-300"
+            data-aos="fade-up"
+            data-aos-duration="1500"
           >
             <h3 className="text-xl font-bold pb-3 mb-3 border-b border-gray-200">
               {car.car}

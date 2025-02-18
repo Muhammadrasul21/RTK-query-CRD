@@ -11,22 +11,26 @@ import { useProfileQuery } from "@/redux/api/auth.api";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/features/auth.slice";
 import { IoMdHome } from "react-icons/io";
+import { navbarLinks } from "@/static/index";
+
 
 const Admin = () => {
   const { isError } = useProfileQuery({});
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (isError) {
       dispatch(logout());
     }
-  });
+  }, [isError]);
 
   const navigate = useNavigate();
-
   const handleLogout = () => {
     dispatch(logout());
   };
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
+    const [menuOpen, setMenuOpen] = useState(false);
+  
 
   useEffect(() => {
     navigate(adminLinks[0]?.path);
@@ -35,11 +39,11 @@ const Admin = () => {
   return (
     <div className="flex">
       <aside
-        className={`overflow-auto h-screen sticky top-0 left-0 bg-sky-950 p-6 text-white flex flex-col transition-all duration-300 ${
+        className={`overflow-auto px-2 h-screen sticky top-0 left-0 bg-sky-950 py-6 text-white flex flex-col transition-all duration-300 ${
           sidebarOpen ? "w-60" : "w-16"
         }`}
       >
-        <div className="flex items-center justify-between">
+        <div className={`flex ${sidebarOpen ? 'flex-row' : 'flex-col gap-8'} items-center justify-between`}>
           <IoMdHome
             onClick={() => navigate("/")}
             className="w-6 h-6 cursor-pointer"
@@ -48,9 +52,9 @@ const Admin = () => {
             className={`text-2xl font-bold transition-all ${sidebarOpen ? "block" : "hidden"}`}
           >
             Admin
-          </p>
+          </p> 
           <GiHamburgerMenu
-            onClick={() => setSidebarOpen(!sidebarOpen)}
+             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="cursor-pointer transition-transform duration-300"
             style={{
               transform: sidebarOpen ? "rotate(90deg)" : "rotate(0deg)",
@@ -58,20 +62,20 @@ const Admin = () => {
           />
         </div>
 
-        <ul className="my-6 flex-1 space-y-1.5">
+        <ul className="my-6 flex-1 space-y-3">
           {adminLinks.map(({ id, path, label, icon: Icon }) => (
             <NavLink
               key={id}
               to={path}
               className={({ isActive }) =>
-                `flex items-center gap-3 py-2 px-3 rounded transition-all duration-200 ${
+                `flex ${sidebarOpen ? '' : 'justify-center'} items-center gap-3 rounded py-2 pl-2 transition-all duration-200 ${
                   isActive
                     ? "bg-blue-600 text-white"
                     : "hover:bg-blue-700 text-gray-100"
                 }`
               }
             >
-              <Icon className="w-5 h-5" />
+              <Icon className="min-w-5 min-h-5" />
               <span
                 className={`transition-all duration-300 ${sidebarOpen ? "opacity-100 w-auto" : "opacity-0 w-0 overflow-hidden"}`}
               >
@@ -81,18 +85,19 @@ const Admin = () => {
           ))}
         </ul>
 
-        <div className=" flex items-center">
-          <CiLogout
-            onClick={() => navigate("/")}
-            className="flex sm:hidden m-auto w-5 h-5"
-          />
-          <button
-            onClick={handleLogout}
-            className={`hidden sm:flex items-center gap-3 py-2 px-3 rounded bg-red-500 hover:bg-red-600 transition-all`}
-          >
-            <CiLogout className="w-5 h-5" />
-            <span>Log Out</span>
-          </button>
+        <div className="flex items-center h-10">
+              <button
+                onClick={handleLogout}
+                className={`flex w-full justify-center cursor-pointer items-center gap-3 py-2 px-3 rounded bg-red-500 hover:bg-red-600 transition-all`}
+              >
+                <CiLogout
+                className="flex  w-5 h-5"
+              />
+              {
+                sidebarOpen ? <span>Log Out</span> : null
+              }
+                
+              </button>  
         </div>
       </aside>
 
@@ -105,13 +110,30 @@ const Admin = () => {
                 Cars
               </p>
             </Link>
+             
+                 <div className="gap-6 hidden md:flex">
+                       {navbarLinks.map((item, index) => {
+                         const linkPath =
+                           item === "Home" ? "/" : `/${item.toLocaleLowerCase()}`;
+                         const isActive = location.pathname === linkPath;
+                         return (
+                           <Link
+                             key={index}
+                             to={linkPath}
+                             className={`text-white text-xl transition ${isActive ? "opacity-100 font font-semibold" : "opacity-70 hover:opacity-100"}`}
+                           >
+                             {item}
+                           </Link>
+                         );
+                       })}
+                     </div>
 
             <div className="flex gap-4">
               <IoSearch className="hidden sm:flex w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />
               <FaRegHeart className="w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />
               <LuShoppingCart className="w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />
               <GiHamburgerMenu
-                onClick={() => setSidebarOpen(!sidebarOpen)}
+                onClick={() => setMenuOpen(!menuOpen)}
                 className={`flex sm:hidden w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer transition-transform duration-300 ${
                   sidebarOpen ? "rotate-90" : "rotate-0"
                 }`}
@@ -119,6 +141,24 @@ const Admin = () => {
             </div>
           </div>
         </nav>
+
+              <div
+                className={`${menuOpen ? "max-h-screen" : "max-h-0"} overflow-hidden transition-all duration-300 bg-blue-700 sm:hidden`}
+              >
+                <ul className="flex flex-col gap-4 p-4">
+                  {navbarLinks?.map((item, index) => (
+                    <li key={index}>
+                      <Link
+                        to={item === "Home" ? "/" : `${item.toLocaleLowerCase()}`}
+                        className="block text-white opacity-70 hover:opacity-100 transition p-2"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {item}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
         <div className="p-6">
           <Outlet />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import loading from "@/assets/loadingg.webp";
 import {
   useCreateBookMutation,
@@ -9,6 +9,8 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { homeINputs } from "@/static/index.js";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Home = () => {
   const { data, isLoading } = useGetBooksQuery();
@@ -24,6 +26,10 @@ const Home = () => {
     type: "",
     soldCount: "",
   });
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -104,6 +110,8 @@ const Home = () => {
           <div
             key={blog.id}
             className=" bg-gray-900 text-white shadow-lg rounded-lg p-4 hover:shadow-xl transition duration-300"
+            data-aos="fade-up"
+            data-aos-duration="1500"
           >
             <h3 className="text-xl font-bold pb-3 mb-3 border-b border-gray-200">
               {blog.title}

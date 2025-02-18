@@ -1,28 +1,40 @@
-import { useLoginMutation } from "@/redux/api/auth.api";
-import { login } from "@/redux/features/auth.slice";
 import React, { useRef } from "react";
+import { useLoginMutation } from "../../redux/api/auth.api";
 import { useDispatch } from "react-redux";
+import { login } from "../../redux/features/auth.slice";
 import { useNavigate } from "react-router-dom";
-import { Button, Checkbox, Form, Input, Typography } from "antd";
-import { toast } from "react-toastify";
+import { Button, Checkbox, Form, Input } from "antd";
+import { Typography } from "antd";
+
+import { notification } from "antd";
 
 const { Title } = Typography;
 
 const Login = () => {
+  const [api, contextHolder] = notification.useNotification();
   const [signin, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const passwordRef = useRef(null);
 
-  const onFinish = async (values) => {
-    try {
-      const res = await signin({ ...values, expiresInMins: 10 }).unwrap();
-      dispatch(login(res.accessToken));
-      navigate("/admin/car");
-    } catch (error) {
-      toast.error(error?.data?.message || "Login failed! Please try again.");
-    }
+  const onFinish = (values) => {
+    signin({ ...values, expiresInMins: 10 })
+      .unwrap()
+      .then((res) => {
+        dispatch(login(res.accessToken));
+        navigate("/admin/groups");
+      })
+      .catch((err) => {
+        api.error({
+          message: "Username or password is incorrect",
+          placement: "bottomRight",
+        });
+      });
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -32,8 +44,11 @@ const Login = () => {
         <Form
           name="basic"
           layout="vertical"
-          initialValues={{ remember: true }}
+          initialValues={{
+            remember: true,
+          }}
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item
@@ -62,13 +77,24 @@ const Login = () => {
 
           <Form.Item>
             <Button
-              type="primary"
               loading={isLoading}
               disabled={isLoading}
+              type="primary"
               className="w-full"
               htmlType="submit"
             >
               Submit
+            </Button>
+          </Form.Item>
+          <Form.Item label={null}>
+            <Button
+              type="primary"
+              onClick={() => navigate("/")}
+              className="w-full"
+              htmlType="button"
+              ghost
+            >
+              Go Home
             </Button>
           </Form.Item>
         </Form>

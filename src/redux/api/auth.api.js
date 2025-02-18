@@ -1,7 +1,6 @@
-import { Profiler } from "react";
-import { mainApi } from "./index";
+import { dummyApi } from "./index";
 
-const extendedApi = mainApi.injectEndpoints({
+const extendedApi = dummyApi.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation({
       query: (body) => ({
