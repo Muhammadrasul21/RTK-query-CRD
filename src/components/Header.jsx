@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import book from "../assets/book.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
@@ -9,25 +9,37 @@ import { navbarLinks } from "../static/index";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <nav className="bg-blue-600 shadow-md sticky top-0 left-0 w-full z-50">
       <div className="container mx-auto h-16 flex items-center justify-between px-6">
         <Link to="/" className="flex items-center gap-2">
-          <img src={book} alt="book" className="w-16 h-16 font-semibold" />
-          <p className="text-2xl font-semibold">Book</p>
+          <img
+            src={book}
+            alt="book"
+            className="w-16 h-16 font-semibold filter invert opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
+          />
+          <p className="text-2xl text-white font-semibold opacity-80 hover:opacity-100 transition duration-300 ease-in-out">
+            Book
+          </p>
         </Link>
 
         <div className="gap-6 hidden md:flex">
-          {navbarLinks.map((item, index) => (
-            <Link
-              key={index}
-              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-              className="text-white opacity-70 hover:opacity-100 transition"
-            >
-              {item}
-            </Link>
-          ))}
+          {navbarLinks.map((item, index) => {
+            const linkPath =
+              item === "Home" ? "/" : `/${item.toLocaleLowerCase()}`;
+            const isActive = location.pathname === linkPath;
+            return (
+              <Link
+                key={index}
+                to={linkPath}
+                className={`text-white transition ${isActive ? "opacity-100 font font-semibold" : "opacity-70 hover:opacity-100"}`}
+              >
+                {item}
+              </Link>
+            );
+          })}
         </div>
         <div className="flex gap-4">
           <IoSearch className="hidden sm:flex w-6 h-6 text-white opacity-70 hover:opacity-100 cursor-pointer" />

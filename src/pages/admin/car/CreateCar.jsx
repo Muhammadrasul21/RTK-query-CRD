@@ -86,7 +86,7 @@ const CreateCar = () => {
           >
             {createLoading ? "Loading..." : "Create Car"}
           </button>
-        </form>  
+        </form>
       </div>
     </div>
   );
